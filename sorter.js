@@ -152,4 +152,76 @@ btnCancel.addEventListener('click', cancel);
 START_BTN?.addEventListener('click', async () => {
   try{ SONGS = await loadSongs(); if(!SONGS.length) throw new Error('No songs in songs.json'); startSorting(SONGS); }
   catch(e){ alert('Failed to start: ' + e.message); console.error(e); }
+/* refs */
+const START_BTN   = document.getElementById('btn-start');
+const HERO        = document.querySelector('.turntable-hero');
+const PLATTER     = document.querySelector('.platter');
+const TONEARM     = document.querySelector('.tonearm');
+const SCREEN_COMPARE = document.getElementById('screen-compare');
+/* (ref lain tetap seperti sebelumnya: imgA, imgB, dsb.) */
+
+/* ...fungsi shuffle/loadSongs/estimateComparisons tetap... */
+
+function startSorting(items){
+  // inisialisasi quicksort stack (sama seperti sebelumnya)
+  stack = [{ arr: shuffle(items.slice()), pivot: null, i: 0, less: [], eq: [], greater: [] }];
+  comparisonsDone = 0;
+  totalComparisonsEstimated = estimateComparisons(items.length);
+
+  // sembunyikan hero, tampilkan compare
+  HERO.style.display = 'none';
+  SCREEN_COMPARE.classList.remove('hidden');
+  nextStep();
+}
+
+/* animasi: tombol vinyl geser ke tengah piringan */
+function moveButtonToCenter(btn, container, target){
+  return new Promise(resolve => {
+    const contRect = container.getBoundingClientRect();
+    const platRect = target.getBoundingClientRect();
+    const btnRect  = btn.getBoundingClientRect();
+
+    // target posisi relatif ke container
+    const targetLeft = (platRect.left - contRect.left) + platRect.width/2 - btnRect.width/2;
+    const targetTop  = (platRect.top  - contRect.top ) + platRect.height/2 - btnRect.height/2;
+
+    // ubah ke layout absolute terhadap container
+    btn.classList.add('moving');
+    btn.style.right = 'auto';
+    btn.style.left  = `${btnRect.left - contRect.left}px`;
+    btn.style.top   = `${btnRect.top  - contRect.top }px`;
+
+    requestAnimationFrame(() => {
+      btn.style.left = `${Math.round(targetLeft)}px`;
+      btn.style.top  = `${Math.round(targetTop)}px`;
+    });
+
+    const done = () => { btn.removeEventListener('transitionend', done); resolve(); };
+    btn.addEventListener('transitionend', done, { once:true });
+  });
+}
+
+/* Start flow */
+START_BTN?.addEventListener('click', async () => {
+  try{
+    const songs = await loadSongs();          // pre-load data (hindari 0/0)
+    await moveButtonToCenter(START_BTN, HERO, PLATTER); // tombol geser ke tengah
+    document.body.classList.add('playing');   // tonearm turun
+    setTimeout(() => startSorting(songs), 750); // beri waktu tonearm mendarat
+  }catch(e){
+    alert('Failed to start: ' + e.message);
+    console.error(e);
+  }
+});
+
+/* cancel() tetap sama: kembalikan hero & angkat tonearm */
+function cancel(){
+  document.body.classList.remove('playing');
+  HERO.style.display = '';
+  SCREEN_COMPARE.classList.add('hidden');
+  stack = []; current = null; comparisonsDone = 0;
+  bar.style.width = '0%'; progressText.textContent = '0 / 0';
+}
+
+  
 });

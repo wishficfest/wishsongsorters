@@ -14,10 +14,22 @@
   </header>
 
   <!-- turntable hero -->
-  <section class="turntable-hero">
-    <div class="platter">
-      <button id="btn-start" class="label-start">Start</button>
-    </div>
+<section class="turntable-hero">
+  <div class="platter">
+    <div class="disc"></div> <!-- CD yang selalu muter -->
+  </div>
+
+  <!-- tombol vinyl abu-abu yang bakal geser ke tengah -->
+  <button id="btn-start" class="vinyl-btn" aria-label="Start">Start</button>
+
+  <!-- tonearm (awalnya OFF di posisi parkir) -->
+  <svg class="tonearm" viewBox="0 0 220 220" aria-hidden="true">
+    <line x1="30" y1="10" x2="210" y2="190" stroke="silver" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="28" cy="10" r="10" fill="#777"/>
+    <rect x="200" y="178" width="18" height="28" rx="4" fill="#333"/>
+  </svg>
+</section>
+
     <!-- simple SVG tonearm for aesthetics -->
     <svg class="tonearm" viewBox="0 0 220 220" aria-hidden="true">
       <line x1="30" y1="10" x2="210" y2="190" stroke="silver" stroke-width="8" stroke-linecap="round"/>

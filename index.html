@@ -13,31 +13,25 @@
     <p class="sub">pick between two songs; preview on Spotify if you need a vibe check.</p>
   </header>
 
-  <!-- turntable hero -->
-<section class="turntable-hero">
-  <div class="platter">
-    <div class="disc"></div> <!-- CD yang selalu muter -->
-  </div>
+  <!-- Turntable HERO -->
+  <section class="turntable-hero">
+    <!-- platter + always-spinning disc -->
+    <div class="platter">
+      <div class="disc"></div>
+    </div>
 
-  <!-- tombol vinyl abu-abu yang bakal geser ke tengah -->
-  <button id="btn-start" class="vinyl-btn" aria-label="Start">Start</button>
+    <!-- grey vinyl button that will slide to platter center -->
+    <button id="btn-start" class="vinyl-btn" aria-label="Start">Start</button>
 
-  <!-- tonearm (awalnya OFF di posisi parkir) -->
-  <svg class="tonearm" viewBox="0 0 220 220" aria-hidden="true">
-    <line x1="30" y1="10" x2="210" y2="190" stroke="silver" stroke-width="8" stroke-linecap="round"/>
-    <circle cx="28" cy="10" r="10" fill="#777"/>
-    <rect x="200" y="178" width="18" height="28" rx="4" fill="#333"/>
-  </svg>
-</section>
-
-    <!-- simple SVG tonearm for aesthetics -->
+    <!-- single tonearm (parks up, drops when playing) -->
     <svg class="tonearm" viewBox="0 0 220 220" aria-hidden="true">
-      <line x1="30" y1="10" x2="210" y2="190" stroke="silver" stroke-width="8" stroke-linecap="round"/>
-      <circle cx="28" cy="10" r="10" fill="#777"/>
-      <rect x="200" y="178" width="18" height="28" rx="4" fill="#333"/>
+      <line x1="30" y1="10" x2="210" y2="190" stroke="#bfc0c3" stroke-width="10" stroke-linecap="round"/>
+      <circle cx="28" cy="10" r="14" fill="#7d7f84"/>
+      <rect x="200" y="178" width="22" height="32" rx="6" fill="#2b2d31"/>
     </svg>
   </section>
 
+  <!-- Compare screen (hidden until Start) -->
   <main id="screen-compare" class="screen hidden">
     <div class="progress">
       <div id="bar" class="bar" style="width:0%"></div>
@@ -51,7 +45,6 @@
         <div class="links">
           <button id="previewA" class="btn mini">Preview</button>
           <a id="spotifyA" target="_blank" rel="noopener">Open in Spotify</a>
-          <a id="youtubeA" target="_blank" rel="noopener">YouTube</a>
         </div>
         <button class="btn choose" data-choice="A">Choose A</button>
       </div>
@@ -64,7 +57,6 @@
         <div class="links">
           <button id="previewB" class="btn mini">Preview</button>
           <a id="spotifyB" target="_blank" rel="noopener">Open in Spotify</a>
-          <a id="youtubeB" target="_blank" rel="noopener">YouTube</a>
         </div>
         <button class="btn choose" data-choice="B">Choose B</button>
       </div>
@@ -76,7 +68,7 @@
     </div>
   </main>
 
-  <!-- modal for Spotify embed -->
+  <!-- Spotify preview modal -->
   <div id="previewModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Spotify preview">
     <div class="modal-inner">
       <button id="modalClose" class="modal-close" aria-label="Close">×</button>

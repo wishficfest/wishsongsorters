@@ -1,92 +1,101 @@
-/* ===== HERO FINAL PATCH ===== */
+/* ===== NCT WISH Song Sorter — clean CSS ===== */
 
-/* kontainer hero */
+/* Theme */
+:root{
+  --bg:#0f1217; --ink:#f5f7fb; --muted:#a3a8b2; --line:#23272f;
+  --brand:#4d7dff; --soft:#171b22; --card:#12161c; --shadow:0 18px 40px rgba(0,0,0,.35);
+  --r:18px;
+}
+
+/* Reset & page */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  color:var(--ink);
+  background: radial-gradient(70vw 50vh at 50% -10%, #151a22 0, transparent 60%) var(--bg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+}
+.page{padding:24px}
+.hdr{text-align:center;margin:10px auto 24px}
+.hdr h1{margin:0 0 6px;font-weight:800;letter-spacing:.2px}
+.sub{color:var(--muted);margin:0 auto;max-width:60ch}
+
+/* Containers & shared */
+.screen{max-width:980px;margin:0 auto}
+.hidden{display:none !important}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:20px;margin:16px auto}
+.row{display:flex;gap:12px;align-items:center}
+.row.center{justify-content:center}
+.btn{appearance:none;border:1px solid var(--line);background:#1a1f27;color:var(--ink);padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600}
+.btn.primary{background:var(--brand);border-color:transparent;color:#fff}
+.btn.soft{background:#1d2230}
+.btn.ghost{background:transparent}
+.btn.mini{padding:6px 10px;font-size:12px}
+.btn:active{transform:translateY(1px)}
+
+/* Progress */
+.progress{position:relative;height:10px;background:#161b24;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:8px 0 14px}
+.bar{height:100%;background:var(--brand);width:0%;transition:width .25s ease}
+.progress-text{position:absolute;right:8px;top:-24px;font-size:12px;color:var(--muted)}
+
+/* Arena */
+.arena{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch;margin:12px 0 6px}
+.vs{display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted)}
+.pick{background:#12161c;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:10px;text-align:center}
+.pick img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;background:#0f131a;border:1px solid var(--line)}
+.pick h2{font-size:18px;margin:6px 0 2px}
+.links{display:flex;gap:8px;justify-content:center}
+.links a{color:var(--brand);text-decoration:none;font-weight:600}
+.links a.disabled{pointer-events:none;opacity:.45}
+.links a:hover{text-decoration:underline}
+@media (max-width:820px){.arena{grid-template-columns:1fr}.vs{order:-1}}
+
+/* ===== Turntable HERO ===== */
 .turntable-hero{
-  position: relative !important;
-  max-width: 980px !important;
-  margin: 0 auto 20px !important;
-  aspect-ratio: 16 / 7 !important;
-  background: #11151b !important;             /* ganti kalau mau foto background */
-  border: 1px solid #23252b !important;
-  border-radius: 22px !important;
-  box-shadow: 0 16px 40px rgba(0,0,0,.35) !important;
-  overflow: hidden !important;
+  position:relative;max-width:980px;margin:0 auto 20px;aspect-ratio:16/7;
+  background:#0f1116;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);
+  overflow:hidden;
 }
-
-/* area piringan di kiri */
-.platter{
-  position: absolute !important;
-  left: 6% !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 46% !important;
-  aspect-ratio: 1 / 1 !important;
-  border-radius: 50% !important;
-}
-
-/* VINYL: hitam bergaris + label biru — MUTER */
+/* platter on left */
+.platter{position:absolute;left:6%;top:50%;transform:translateY(-50%);width:46%;aspect-ratio:1/1;border-radius:50%}
+/* spinning vinyl (black w/ blue label) */
 .disc{
-  position: absolute !important;
-  inset: 0 !important;
-  border-radius: 50% !important;
-  /* grooves + label biru seperti foto #2 */
+  position:absolute;inset:0;border-radius:50%;
   background:
-    radial-gradient(circle at 50% 50%, #2aa6d9 0 18%, transparent 18% 100%), /* label biru */
-    repeating-radial-gradient(circle at 50% 50%, #0b0c10 0, #0b0c10 2px, #0f1116 2px, #0f1116 4px), /* grooves */
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 0 46%, transparent 47% 100%); /* highlight */
-  box-shadow: inset 0 0 80px rgba(0,0,0,.35) !important;
-  animation: disc-spin 20s linear infinite !important;
+    radial-gradient(circle at 50% 50%, #2aa6d9 0 18%, transparent 18% 100%),
+    repeating-radial-gradient(circle at 50% 50%, #0a0b0e 0, #0a0b0e 2px, #0e1015 2px, #0e1015 4px),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 0 46%, transparent 47% 100%);
+  box-shadow: inset 0 0 80px rgba(0,0,0,.35);
+  animation: disc-spin 20s linear infinite;
 }
-.disc::after{ /* spindle kecil di tengah */
-  content: "";
-  position: absolute; left: 50%; top: 50%;
-  width: 10px; height: 10px; margin: -5px 0 0 -5px;
-  border-radius: 50%;
-  background: #d6d6d6;
-  box-shadow: 0 0 6px rgba(0,0,0,.4) inset;
+.disc::after{
+  content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;
+  background:#d6d6d6;box-shadow:0 0 6px rgba(0,0,0,.4) inset;
 }
-@keyframes disc-spin { from{ transform: rotate(0) } to{ transform: rotate(360deg) } }
+@keyframes disc-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-/* tombol start (abu-abu) — selalu di atas & KLIK-able */
+/* Start button (grey “vinyl”) — sits above, clickable */
 .vinyl-btn{
-  position: absolute !important;
-  right: 7% !important;
-  top: 24% !important;
-  width: 92px !important; height: 92px !important;
-  border-radius: 50% !important;
-  background: #cfd1d6 !important;
-  color: #1f2024 !important; font-weight: 800 !important;
-  border: 2px solid #2a7bd3 !important;   /* ring biru tipis (biar mirip screenshot) */
-  box-shadow: 0 10px 24px rgba(0,0,0,.35) !important;
-  cursor: pointer !important;
-  z-index: 5 !important;
+  position:absolute;right:7%;top:24%;width:92px;height:92px;border-radius:50%;
+  background:#cfd1d6;color:#1f2024;font-weight:800;border:2px solid #2a7bd3;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);cursor:pointer;z-index:5;
 }
-.vinyl-btn.moving{
-  transition: left .8s ease, top .8s ease, right .8s ease !important;
-  will-change: left, top;
-}
+.vinyl-btn.moving{transition:left .8s ease, top .8s ease, right .8s ease;will-change:left,top}
 
-/* tonearm di dalam hero, tidak menghalangi klik */
+/* Tonearm inside hero, doesn't block clicks */
 .tonearm{
-  position: absolute !important;
-  right: 7% !important;
-  top: 12% !important;
-  width: 32% !important;
-  height: auto !important;
-  transform-origin: 10% 10% !important;
-  transform: rotate(-22deg) !important;
-  transition: transform .8s ease !important;
-  z-index: 1 !important;
-  pointer-events: none !important;        /* <- ini yang bikin tombol bisa diklik */
+  position:absolute;right:7%;top:12%;width:32%;height:auto;
+  transform-origin:10% 10%;transform:rotate(-22deg);transition:transform .8s ease;
+  z-index:1;pointer-events:none;
 }
-.tonearm *{ pointer-events: none !important; }
-body.playing .tonearm{ transform: rotate(18deg) !important; }
+.tonearm *{pointer-events:none}
+body.playing .tonearm{transform:rotate(18deg)}
 
-/* progress/arena tetep normal; util */
-.hidden{ display: none !important; }
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:50}
+.modal.hidden{display:none !important}
+.modal-inner{width:min(520px,92vw);background:#0f1217;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px}
+.modal-close{position:absolute;margin-top:-10px;margin-left:calc(min(520px,92vw) - 30px);background:transparent;color:#fff;border:none;font-size:22px;cursor:pointer}
 
-/* responsive kecil */
-@media (max-width: 820px){
-  .vinyl-btn{ width: 76px !important; height: 76px !important; top: 26% !important; right: 6% !important; }
-  .tonearm{ width: 36% !important; right: 6% !important; top: 14% !important; }
-}
+/* Footer */
+.ftr{text-align:center;color:var(--muted);margin:20px 0 8px}
